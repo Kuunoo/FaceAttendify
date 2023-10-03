@@ -26,8 +26,8 @@ cnx = mysql.connector.connect(
     host="faceattendify.mysql.database.azure.com",
     port=3306,
     database="zagusopas",
-     
-   
+    ssl_ca="DigiCertGlobalRootCA.crt.pem",
+
 )
 
 # Define  cursor
@@ -362,7 +362,7 @@ def fr_page():
     if request.args.get('duration') != "" and request.args.get('duration') != None and request.args.get('duration') != "auto":
         session['attendanceduration'] = request.args.get('duration')
     '''
-    
+
     random_attendance_id = session['random_attendance_id']
     mycursor.execute("select a.group_id, a.random_time, a.duration "
                      "  from random_attendance a "
@@ -384,8 +384,8 @@ def countTodayScan():
       host="faceattendify.mysql.database.azure.com",
       port=3306,
       database="zagusopas",
-      
-     
+      ssl_ca="DigiCertGlobalRootCA.crt.pem"
+
     )
   mycursor = mydb.cursor()
 
@@ -406,8 +406,8 @@ def loadData():
       host="faceattendify.mysql.database.azure.com",
       port=3306,
       database="zagusopas",
-       
-     
+      ssl_ca="DigiCertGlobalRootCA.crt.pem",
+
   )
   mycursor = mydb.cursor()
   user_id = session['user_id']
@@ -597,8 +597,8 @@ def userlist():
         host="faceattendify.mysql.database.azure.com",
         port=3306,
         database="zagusopas",
-         
-       
+        ssl_ca="DigiCertGlobalRootCA.crt.pem",
+
     )
     mycursor = mydb.cursor()
     data1 = ""
@@ -1000,7 +1000,7 @@ def countTodayAttenScan():
         host="faceattendify.mysql.database.azure.com",
         port=3306,
         database="zagusopas",
-         
+        ssl_ca="DigiCertGlobalRootCA.crt.pem",
        
     )
     mycursor = mydb.cursor(buffered=True)
