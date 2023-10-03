@@ -27,7 +27,7 @@ cnx = mysql.connector.connect(
     port=3306,
     database="zagusopas",
     ssl_ca="ca-cert-filename.pem",
-    ssl_disabled=False
+   
 )
 
 # Define  cursor
@@ -385,7 +385,7 @@ def countTodayScan():
       port=3306,
       database="zagusopas",
       ssl_ca="ca-cert-filename.pem",
-      ssl_disabled=False
+     
     )
   mycursor = mydb.cursor()
 
@@ -407,7 +407,7 @@ def loadData():
       port=3306,
       database="zagusopas",
       ssl_ca="ca-cert-filename.pem",
-      ssl_disabled=False
+     
   )
   mycursor = mydb.cursor()
   user_id = session['user_id']
@@ -598,7 +598,7 @@ def userlist():
         port=3306,
         database="zagusopas",
         ssl_ca="ca-cert-filename.pem",
-        ssl_disabled=False
+       
     )
     mycursor = mydb.cursor()
     data1 = ""
@@ -1001,7 +1001,7 @@ def countTodayAttenScan():
         port=3306,
         database="zagusopas",
         ssl_ca="ca-cert-filename.pem",
-        ssl_disabled=False
+       
     )
     mycursor = mydb.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
