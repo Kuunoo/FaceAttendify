@@ -26,7 +26,7 @@ cnx = mysql.connector.connect(
     host="faceattendify.mysql.database.azure.com",
     port=3306,
     database="zagusopas",
-    ssl_ca="ca-cert-filename.pem",
+     
    
 )
 
@@ -384,7 +384,7 @@ def countTodayScan():
       host="faceattendify.mysql.database.azure.com",
       port=3306,
       database="zagusopas",
-      ssl_ca="ca-cert-filename.pem",
+      
      
     )
   mycursor = mydb.cursor()
@@ -406,7 +406,7 @@ def loadData():
       host="faceattendify.mysql.database.azure.com",
       port=3306,
       database="zagusopas",
-      ssl_ca="ca-cert-filename.pem",
+       
      
   )
   mycursor = mydb.cursor()
@@ -597,7 +597,7 @@ def userlist():
         host="faceattendify.mysql.database.azure.com",
         port=3306,
         database="zagusopas",
-        ssl_ca="ca-cert-filename.pem",
+         
        
     )
     mycursor = mydb.cursor()
@@ -1000,7 +1000,7 @@ def countTodayAttenScan():
         host="faceattendify.mysql.database.azure.com",
         port=3306,
         database="zagusopas",
-        ssl_ca="ca-cert-filename.pem",
+         
        
     )
     mycursor = mydb.cursor(buffered=True)
