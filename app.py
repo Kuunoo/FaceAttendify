@@ -15,6 +15,7 @@ import psycopg2
 app = Flask(__name__)
 app.secret_key = 'your secret key'
 
+
 cnt = 0
 pause_cnt = 0
 justscanned = False
@@ -1152,7 +1153,7 @@ def updateprofile_submit():
 
 
 ##################################### END USER MANAGEMENT#####################################################
-conn.close()
+cnx.close()
 
 if __name__ == '__main__':
     app.run(debug=True)
