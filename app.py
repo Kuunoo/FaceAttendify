@@ -9,7 +9,6 @@ import os
 import time
 from datetime import date, datetime
 import re
-import psycopg2
 
 
 app = Flask(__name__)
@@ -20,25 +19,18 @@ cnt = 0
 pause_cnt = 0
 justscanned = False
 
-# Define the database cnx parameters for PostgreSQL
-db_host = "faceattendify-server.postgres.database.azure.com"
-db_user = "vjgwsnnekx"
-db_password = "MU5OW52HZ8OG54E5$"
-db_port = 5432
-db_name = "faceattendify-database"
 
-# Create a cnx to the PostgreSQL database
+cnx = mysql.connector.connect(
+    user="zagusopas",
+    password="zapas@0925",
+    host="faceattendify.mysql.database.azure.com",
+    port=3306,
+    database="zagusopas",
+    ssl_ca="ca-cert-filename.pem",
+    ssl_disabled=False
+)
 
-cnx = psycopg2.connect(
-        user=db_user,
-        password=db_password,
-        host=db_host,
-        port=db_port,
-        database=db_name
-    )
-
-
-# Define your cursor
+# Define  cursor
 mycursor = cnx.cursor()
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Generate dataset >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -387,10 +379,13 @@ def fr_page():
 @app.route('/countTodayScan')
 def countTodayScan():
   mydb = mysql.connector.connect(
-      host="faceattendify-server.postgres.database.azure.com",
-      user="vjgwsnnekx",
-      passwd="MU5OW52HZ8OG54E5$",
-      database="faceattendify-database"
+      user="zagusopas",
+      password="zapas@0925",
+      host="faceattendify.mysql.database.azure.com",
+      port=3306,
+      database="zagusopas",
+      ssl_ca="ca-cert-filename.pem",
+      ssl_disabled=False
     )
   mycursor = mydb.cursor()
 
@@ -406,10 +401,13 @@ def countTodayScan():
 @app.route('/loadData', methods=['GET', 'POST'])
 def loadData():
   mydb = mysql.connector.connect(
-       host="localhost",
-       user="root",
-       passwd="",
-       database="zagusopas"
+      user="zagusopas",
+      password="zapas@0925",
+      host="faceattendify.mysql.database.azure.com",
+      port=3306,
+      database="zagusopas",
+      ssl_ca="ca-cert-filename.pem",
+      ssl_disabled=False
   )
   mycursor = mydb.cursor()
   user_id = session['user_id']
@@ -594,10 +592,13 @@ def updateownprofile_submit():
 @app.route('/userlist')
 def userlist():
     mydb = mysql.connector.connect(
-        host="faceattendify-server.postgres.database.azure.com",
-        user="vjgwsnnekx",
-        passwd="MU5OW52HZ8OG54E5$",
-        database="faceattendify-database"
+        user="zagusopas",
+        password="zapas@0925",
+        host="faceattendify.mysql.database.azure.com",
+        port=3306,
+        database="zagusopas",
+        ssl_ca="ca-cert-filename.pem",
+        ssl_disabled=False
     )
     mycursor = mydb.cursor()
     data1 = ""
@@ -994,10 +995,13 @@ def setrandomattendance():
 def countTodayAttenScan():
     user_id = session['user_id']
     mydb = mysql.connector.connect(
-        host="faceattendify-server.postgres.database.azure.com",
-        user="vjgwsnnekx",
-        passwd="MU5OW52HZ8OG54E5$",
-        database="faceattendify-database"
+        user="zagusopas",
+        password="zapas@0925",
+        host="faceattendify.mysql.database.azure.com",
+        port=3306,
+        database="zagusopas",
+        ssl_ca="ca-cert-filename.pem",
+        ssl_disabled=False
     )
     mycursor = mydb.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
