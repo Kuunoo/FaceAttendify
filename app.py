@@ -26,10 +26,10 @@ justscanned = False
 #database = "vd2o5djn3ce6mnds"
 
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="zagusopas"
+    host="faceattendify-server.postgres.database.azure.com",
+    user="vjgwsnnekx",
+    passwd="MU5OW52HZ8OG54E5$",
+    database="faceattendify-database"
 )
 #mycursor = mydb.cursor()
 mycursor = mydb.cursor(buffered=True)
@@ -416,11 +416,11 @@ def fr_page():
 @app.route('/countTodayScan')
 def countTodayScan():
   mydb = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      passwd="",
-      database="zagusopas"
-  )
+      host="faceattendify-server.postgres.database.azure.com",
+      user="vjgwsnnekx",
+      passwd="MU5OW52HZ8OG54E5$",
+      database="faceattendify-database"
+    )
   mycursor = mydb.cursor()
 
   mycursor.execute("select count(*) "
@@ -435,10 +435,10 @@ def countTodayScan():
 @app.route('/loadData', methods=['GET', 'POST'])
 def loadData():
   mydb = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      passwd="",
-      database="zagusopas"
+       host="localhost",
+       user="root",
+       passwd="",
+       database="zagusopas"
   )
   mycursor = mydb.cursor()
   user_id = session['user_id']
@@ -623,10 +623,10 @@ def updateownprofile_submit():
 @app.route('/userlist')
 def userlist():
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="",
-        database="zagusopas"
+        host="faceattendify-server.postgres.database.azure.com",
+        user="vjgwsnnekx",
+        passwd="MU5OW52HZ8OG54E5$",
+        database="faceattendify-database"
     )
     mycursor = mydb.cursor()
     data1 = ""
@@ -1023,12 +1023,11 @@ def setrandomattendance():
 def countTodayAttenScan():
     user_id = session['user_id']
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        passwd="",
-        database="zagusopas"
+        host="faceattendify-server.postgres.database.azure.com",
+        user="vjgwsnnekx",
+        passwd="MU5OW52HZ8OG54E5$",
+        database="faceattendify-database"
     )
-    #mycursor = mydb.cursor()
     mycursor = mydb.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
     #mycursor.execute("select a.id from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND TIME_FORMAT(a.random_time, '%H:%i')=TIME_FORMAT(CURRENT_TIME(), '%H:%i')")
