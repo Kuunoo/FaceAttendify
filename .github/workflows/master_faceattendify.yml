@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'FaceAttendify'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EDA6EF8D09F04315AC3EC865F49B69E5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BF60EDED2DBE467099DFF731683EAE52 }}
