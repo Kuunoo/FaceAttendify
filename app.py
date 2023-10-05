@@ -10,6 +10,10 @@ import time
 from datetime import date, datetime
 import re
 
+
+app = Flask(__name__)
+app.secret_key = 'your secret key'
+
 cnt = 0
 pause_cnt = 0
 justscanned = False
@@ -1152,3 +1156,5 @@ def updateprofile_submit():
 ##################################### END USER MANAGEMENT#####################################################
 
 cnx.close()
+if __name__ == '__main__':
+    app.run(debug=True)
