@@ -40,7 +40,7 @@ def generate_dataset(nbr):
         # scaling factor=1.3
         # Minimum neighbor = 5
 
-        if not faces:
+        if faces == ():
             return None
         for (x, y, w, h) in faces:
             cropped_face = img[y:y + h, x:x + w]
@@ -72,8 +72,8 @@ def generate_dataset(nbr):
             cv2.imwrite(file_name_path, face)
             cv2.putText(face, str(count_img), (5, 15), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
 
-            mycursor.execute("""INSERT INTO img_dataset (img_id, img_person) VALUES (%s, %s)""",
-                            (img_id, nbr))
+            mycursor.execute("""INSERT INTO `img_dataset` (`img_id`, `img_person`) VALUES
+                                ('{}', '{}')""".format(img_id, nbr))
             cnx.commit()
             if int(img_id) == int(max_imgid):
                 cv2.putText(face, "Train Complete", (5, 30), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
@@ -86,6 +86,43 @@ def generate_dataset(nbr):
                 break
                 cap.release()
                 cv2.destroyAllWindows()
+
+
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Train Classifier >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@app.route('/train_classifier/<nbr>')
+def train_classifier(nbr):
+    user_id = session.get('user_id')  # Get the user's ID from the session
+    #dataset_dir = "C:/Users/jd/PycharmProjects/FlaskOpencv_FaceRecognition/dataset"
+    if not has_completed_training(user_id):
+        dataset_dir = "dataset"
+
+        path = [os.path.join(dataset_dir, f) for f in os.listdir(dataset_dir)]
+        faces = []
+        ids = []
+
+        for image in path:
+            img = Image.open(image).convert('L');
+            imageNp = np.array(img, 'uint8')
+            id = int(os.path.split(image)[1].split(".")[1])
+
+            faces.append(imageNp)
+            ids.append(id)
+        ids = np.array(ids)
+
+        # Train the classifier and save
+        clf = cv2.face.LBPHFaceRecognizer_create()
+        clf.train(faces, ids)
+        clf.write("classifier.xml")
+
+
+        mycursor.execute("UPDATE users SET completed_training = 1 WHERE id = %s", (user_id,))
+        cnx.commit()
+
+        flash('Training completed successfully.', 'success')
+    else:
+        flash('You can only train once.', 'warning')
+
+    return redirect('/updateownprofile')
 
 @app.route('/gendataset')
 def gendataset():
@@ -266,7 +303,6 @@ def face_recognition(group_id, attendancetime, attendanceduration, random_attend
         key = cv2.waitKey(1)
         if key == 27:
             break
-
 
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< END Face Recognition >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
