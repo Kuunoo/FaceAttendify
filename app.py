@@ -1124,5 +1124,5 @@ def updateprofile_submit():
 
 
 ##################################### END USER MANAGEMENT#####################################################
- mycursor.close()
+
 cnx.close()
