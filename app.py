@@ -524,7 +524,7 @@ def signup_submit():
 def updateownprofile():
     # Check if user is loggedin
     if 'loggedin' in session:
-        # We need all the account info for the user so we can display it on the profile page
+      # We need all the account info for the user so we can display it on the profile page
         mycursor.execute('SELECT * FROM users WHERE id = %s', (session['user_id'],))
         account = mycursor.fetchone()
         # Show the profile page with account info
