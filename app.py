@@ -10,15 +10,11 @@ import time
 from datetime import date, datetime
 import re
 
-
-
 cnt = 0
 pause_cnt = 0
 justscanned = False
 
-
 cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
-
 # Define  cursor
 mycursor = cnx.cursor()
 
@@ -90,7 +86,6 @@ def generate_dataset(nbr):
                 break
                 cap.release()
                 cv2.destroyAllWindows()
-
 
 @app.route('/gendataset')
 def gendataset():
@@ -305,8 +300,6 @@ def video_feed():
     attendanceduration = row[2]
     user_id = session['user_id']
 
-    #attendancetime = session['attendancetime']
-    #attendanceduration = session['attendanceduration']
 
     # Video streaming route. Put this in the src attribute of an img tag
     return Response(face_recognition(group_id, attendancetime, attendanceduration, random_attendance_id,user_id), mimetype='multipart/x-mixed-replace; boundary=frame')
@@ -951,14 +944,11 @@ def setrandomattendance():
        status = "active"
        #random_time = str(request.form.getlist['random_time[]'])
        for random_time in request.form.getlist('random_time[]'):
-           print(random_time)
            mycursor.execute(
                "INSERT INTO random_attendance ( user_id, group_id, random_time, duration, status) VALUES ('" + str(
                    user_id) + "','" + str(
                    group_id) + "','" + str(random_time) + "','" + str(duration) + "','" + str(status) + "')")
            cnx.commit()
-       print(random_time)
-
    data = ""
    #return jsonify(response=data)
    return redirect(url_for('agrouplist'))
