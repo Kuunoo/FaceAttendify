@@ -25,10 +25,14 @@ justscanned = False
 #port = 3306
 #database = "vd2o5djn3ce6mnds"
 
-cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
-# Define  cursor
-
-mycursor = cnx.cursor(buffered=True)
+cnx = mysql.connector.connect(
+    host="zagusopas",
+    user="zagusopas",
+    password="zapas@0925",
+    database="faceattendify.mysql.database.azure.com"
+)
+#mycursor = mydb.cursor()
+mycursor = mydb.cursor(buffered=True)
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Generate dataset >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def generate_dataset(nbr):
@@ -411,8 +415,14 @@ def fr_page():
 
 @app.route('/countTodayScan')
 def countTodayScan():
-  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
-  mycursor = cnx.cursor(buffered=True)
+    cnx = mysql.connector.connect(
+        host="zagusopas",
+        user="zagusopas",
+        password="zapas@0925",
+        database="faceattendify.mysql.database.azure.com"
+    )
+    # mycursor = mydb.cursor()
+    mycursor = mydb.cursor(buffered=True)
 
   mycursor.execute("select count(*) "
                    "  from accs_hist "
@@ -1003,9 +1013,14 @@ def setrandomattendance():
 @app.route('/countTodayAttenScan', methods=['GET', 'POST'])
 def countTodayAttenScan():
     user_id = session['user_id']
-    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
-    #mycursor = cnx.cursor()
-    mycursor = cnx.cursor(buffered=True)
+    cnx = mysql.connector.connect(
+        host="zagusopas",
+        user="zagusopas",
+        password="zapas@0925",
+        database="faceattendify.mysql.database.azure.com"
+    )
+    # mycursor = mydb.cursor()
+    mycursor = mydb.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
     #mycursor.execute("select a.id from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND TIME_FORMAT(a.random_time, '%H:%i')=TIME_FORMAT(CURRENT_TIME(), '%H:%i')")
     mycursor.execute("select a.id from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(
