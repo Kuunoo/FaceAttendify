@@ -1,5 +1,4 @@
 {% include "header.html" %}
-<!--suppress XmlInvalidId, XmlInvalidId -->lInvalidId -->lInvalidId -->lInvalidId -->
 <style>
     body {
     font-family: Arial, sans-serif;
@@ -56,6 +55,7 @@ input[type="password"] {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+
 }
 
 input[type="submit"],
@@ -114,9 +114,9 @@ a.close-button:hover {
                     <td><label for="user_role">User Role:</label></td>
                     <td>
                         <select name="user_role" required>
-                            <option value="student" >Student</option>
-                            <option value="teacher" >Teacher</option>
-                            <option value="admin" >Admin</option>
+                            <option value="student" {% if user.user_role != 'student' %}selected{% endif %}>Student</option>
+                            <option value="teacher" {% if user.user_role != 'teacher' %}selected{% endif %}>Teacher</option>
+                            <option value="admin" {% if user.user_role != 'admin' %}selected{% endif %}>Admin</option>
                         </select>
                     </td>
                 </tr>

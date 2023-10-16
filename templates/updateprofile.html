@@ -37,7 +37,7 @@
 															{% if account[13]!='' %}
                                                             <img src="{{ url_for('static', filename='user_photo/') }}{{ account[13] }}" class="picture-src" id="wizardPicturePreview" title="">
 									                        {% else %}
-									                         <img src="{{ url_for('static', filename='assets/img/default-avatar.png') }}" class="picture-src" id="" title="" />
+									                         <img src="{{ url_for('static', filename='assets/img/default-avatar.png') }}" class="picture-src" id="wizardPicturePreview" title="" />
                                                             {% endif %}
                                                             <!--input type="file" id="wizard-picture" name="fileToUpload"-->
 															<input type="hidden" name="photo" value="{{ account[13] }}" />
