@@ -25,7 +25,7 @@ justscanned = False
 #port = 3306
 #database = "vd2o5djn3ce6mnds"
 
-cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
 # Define  cursor
 
 mycursor = cnx.cursor(buffered=True)
@@ -411,7 +411,7 @@ def fr_page():
 
 @app.route('/countTodayScan')
 def countTodayScan():
-  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
   mycursor = cnx.cursor()
 
   mycursor.execute("select count(*) "
@@ -425,7 +425,7 @@ def countTodayScan():
 
 @app.route('/loadData', methods=['GET', 'POST'])
 def loadData():
-  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
   mycursor = cnx.cursor()
   user_id = session['user_id']
 
@@ -608,7 +608,7 @@ def updateownprofile_submit():
 
 @app.route('/userlist')
 def userlist():
-    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
     mycursor = cnx.cursor()
     data1 = ""
     #mycursor.execute("select * from users where user_role!='teacher'")
@@ -1003,7 +1003,7 @@ def setrandomattendance():
 @app.route('/countTodayAttenScan', methods=['GET', 'POST'])
 def countTodayAttenScan():
     user_id = session['user_id']
-    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
     #mycursor = cnx.cursor()
     mycursor = cnx.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
