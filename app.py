@@ -25,7 +25,7 @@ justscanned = False
 #port = 3306
 #database = "vd2o5djn3ce6mnds"
 
-cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
+cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
 # Define  cursor
 
 mycursor = cnx.cursor(buffered=True)
@@ -395,7 +395,7 @@ def fr_page():
     if request.args.get('duration') != "" and request.args.get('duration') != None and request.args.get('duration') != "auto":
         session['attendanceduration'] = request.args.get('duration')
     '''
-    
+
     random_attendance_id = session['random_attendance_id']
     mycursor.execute("select a.group_id, a.random_time, a.duration "
                      "  from random_attendance a "
@@ -411,8 +411,8 @@ def fr_page():
 
 @app.route('/countTodayScan')
 def countTodayScan():
-  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
-  mycursor = cnx.cursor()
+  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+  mycursor = cnx.cursor(buffered=True)
 
   mycursor.execute("select count(*) "
                    "  from accs_hist "
@@ -425,8 +425,8 @@ def countTodayScan():
 
 @app.route('/loadData', methods=['GET', 'POST'])
 def loadData():
-  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
-  mycursor = cnx.cursor()
+  cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+  mycursor = cnx.cursor(buffered=True)
   user_id = session['user_id']
 
   mycursor.execute("select a.accs_id, a.accs_prsn, b.first_name, b.last_name, date_format(a.accs_added, '%H:%i:%s') "
@@ -608,8 +608,8 @@ def updateownprofile_submit():
 
 @app.route('/userlist')
 def userlist():
-    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
-    mycursor = cnx.cursor()
+    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
+    mycursor = cnx.cursor(buffered=True)
     data1 = ""
     #mycursor.execute("select * from users where user_role!='teacher'")
     mycursor.execute("SELECT DISTINCT(b.img_person), a.* FROM users a LEFT JOIN img_dataset b ON a.id = b.img_person WHERE user_role NOT IN ('teacher', 'admin')")
@@ -1003,7 +1003,7 @@ def setrandomattendance():
 @app.route('/countTodayAttenScan', methods=['GET', 'POST'])
 def countTodayAttenScan():
     user_id = session['user_id']
-    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem" )
+    cnx = mysql.connector.connect(user="zagusopas", password="zapas@0925", host="faceattendify.mysql.database.azure.com", port=3306, database="zagusopas", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False)
     #mycursor = cnx.cursor()
     mycursor = cnx.cursor(buffered=True)
     #mycursor.execute("select a.group_id,a.random_time,now(),CURRENT_TIME() from random_attendance a left join join_groups c on a.group_id=c.group_id WHERE c.user_id='" + str(user_id) + "' AND DATE(a.created)=CURDATE() AND a.random_time>CURRENT_TIME()")
